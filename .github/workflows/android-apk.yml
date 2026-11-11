@@ -1,0 +1,71 @@
+name: Android APK
+
+# Builds an installable APK on every pull request and on main, so there is always a
+# build to put on a phone without a local Android toolchain. Download it from the run's
+# "Artifacts" section. It is signed with the debug key: fine for testing and sharing
+# directly, not for the Play Store (see apk.md).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Public, client-safe values only. Set them under Settings -> Secrets and variables ->
+  # Actions -> Variables. Left unset, the app builds in preview mode with sample places.
+  EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
+  EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+  EXPO_PUBLIC_MAP_STYLE_URL: ${{ vars.EXPO_PUBLIC_MAP_STYLE_URL }}
+
+jobs:
+  apk:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: gradle-${{ runner.os }}-
+      - run: npm ci
+      - name: Generate the Android project
+        working-directory: apps/mobile
+        run: npx expo prebuild --platform android --no-install
+      - name: Build the release APK
+        working-directory: apps/mobile/android
+        # arm64 covers current phones, armeabi-v7a older ones, x86_64 the emulator.
+        run: >
+          ./gradlew assembleRelease --no-daemon --stacktrace
+          -PreactNativeArchitectures=arm64-v8a,armeabi-v7a,x86_64
+          -Dorg.gradle.jvmargs="-Xmx4g -XX:MaxMetaspaceSize=1g"
+      - name: Name the APK
+        run: |
+          mkdir -p out
+          cp apps/mobile/android/app/build/outputs/apk/release/app-release.apk out/gupit-goa.apk
+          ls -lh out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gupit-goa-apk
+          path: out/gupit-goa.apk
+          if-no-files-found: error
+          retention-days: 30
