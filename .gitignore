@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets (never commit real values)
+.env
+.env.*
+!.env.example
+
+# Expo / React Native
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+apps/mobile/android/
+apps/mobile/ios/
+
+# Supabase local state
+supabase/.branches/
+supabase/.temp/
+
+# Build output and caches
+build/
+coverage/
+*.tsbuildinfo
+.turbo/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
