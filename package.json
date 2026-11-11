@@ -1,0 +1,40 @@
+{
+  "name": "gupit-goa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gupit Goa: native Android and iOS discovery app for Goa, with its backend and research worker.",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "mobile": "npm run start -w @gupit/mobile",
+    "worker": "npm run start -w @gupit/research-worker --",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "test": "vitest run --project shared --project research-worker --project mobile",
+    "test:db": "vitest run --project db",
+    "db:local": "bash supabase/tests/local-postgres.sh",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "pg": "^8.23.1",
+    "prettier": "^3.10.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
+  },
+  "overrides": {
+    "react": "19.3.0"
+  }
+}
