@@ -51,7 +51,7 @@ Two real defects were found and fixed by these checks: Try-instead silently drop
   - Phone: removals are queued on the device and sent once, so a removed place does not come back; a sync never deletes anything from the phone. 9 sync tests and 4 input tests.
   - Not yet exercised against a hosted project: the email code step needs the template change in the runbook (step 6), and no hosted backend existed when this was written.
 - **Research leads.** 36 places from tourism-board pages, newspapers, travel publications and blogs, as review candidates with their source links (`supabase/research/`). No coordinates are supplied and nothing is published; 5 tests enforce that. Google Maps and Reddit were not scraped and are not used as evidence.
-- **Map cluster counts** now use the font the base map style already loads. This is a likely fix; confirm on the emulator screenshot.
+- **Map cluster counts** were switched to the font the base map style already loads. The emulator screenshot shows the numbers are still not readable, so this remains an open cosmetic bug.
 - **Usability.** The empty Saved screen explains how to save and links to Explore; privacy text covers the optional account.
 
 ## What is built
