@@ -84,7 +84,8 @@ export default function More() {
         )}
       </View>
       <AppText variant="caption" color={colors.inkMuted} style={styles.version}>
-        Gupit Goa {Constants.expoConfig?.version ?? ''} · Map data from OpenStreetMap contributors
+        Gupit Goa {Constants.expoConfig?.version ?? ''} · Map by OpenFreeMap, data from
+        OpenStreetMap contributors
       </AppText>
     </Screen>
   );
