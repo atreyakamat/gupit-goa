@@ -88,6 +88,7 @@ export default function SavedList() {
                 spot={{
                   slug: item.detail.slug,
                   name: item.detail.name,
+                  category_slug: item.detail.category.slug,
                   category_label: item.detail.category.label,
                   locality: item.detail.locality,
                   discovery_labels: item.detail.discovery_labels,

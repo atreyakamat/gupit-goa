@@ -49,6 +49,11 @@ export function SpotList({
 const Separator = () => <View style={styles.separator} />;
 
 const styles = StyleSheet.create({
-  content: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xxl, flexGrow: 1 },
+  content: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.xxl,
+    flexGrow: 1,
+  },
   separator: { height: spacing.md },
 });

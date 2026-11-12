@@ -38,6 +38,7 @@ import {
   type SpotEditorData,
 } from '@/features/admin/api';
 import { deleteSpotPhoto, pickAndUploadSpotPhoto } from '@/features/admin/media';
+import { SocialPostsEditor } from '@/features/admin/SocialPostsEditor';
 import { FormField, ReasonSheet, csv, fromCsv, shortDate } from '@/features/admin/ui';
 import { mediaUrl } from '@/lib/api';
 import { useCategories } from '@/lib/hooks';
@@ -656,6 +657,8 @@ export default function SpotEditor() {
           }
         />
       </Section>
+
+      <SocialPostsEditor spotId={id} />
 
       <Section title="Status">
         {!live ? (

@@ -336,3 +336,126 @@ describe('scheduled maintenance', () => {
     ).toBe(2);
   });
 });
+
+describe('creator posts linked to a place', () => {
+  const posts = (spotId: string) =>
+    call<{ url: string; creator_handle: string | null; note: string | null }[]>(
+      db,
+      'anon',
+      null,
+      'public.get_spot_social_posts',
+      [spotId],
+    );
+  const save = (
+    spotId: string,
+    url: string,
+    handle: string | null = null,
+    note: string | null = null,
+  ) =>
+    call<string>(db, 'authenticated', adminId, 'public.admin_save_social_post', [
+      spotId,
+      url,
+      handle,
+      note,
+    ]);
+
+  it('stores a cleaned link, handle and note, and nothing else', async () => {
+    const spot = await seedSpot(db, { name: 'Tagged Café', lat: 15.52, lng: 73.82 });
+    await save(
+      spot,
+      'https://instagram.com/reel/Cabc_123-x/?igsh=tracking123&utm_source=x',
+      '@Goa.Frames',
+      'Breakfast in the courtyard.',
+    );
+    await save(spot, 'http://m.instagram.com/p/Dxyz789', null, null);
+    expect(await posts(spot)).toEqual([
+      {
+        id: expect.any(String),
+        platform: 'instagram',
+        url: 'https://www.instagram.com/reel/Cabc_123-x/',
+        creator_handle: 'goa.frames',
+        note: 'Breakfast in the courtyard.',
+      },
+      {
+        id: expect.any(String),
+        platform: 'instagram',
+        url: 'https://www.instagram.com/p/Dxyz789/',
+        creator_handle: null,
+        note: null,
+      },
+    ]);
+    const columns = (
+      await db.query(
+        `select column_name from information_schema.columns where table_name = 'spot_social_posts'`,
+      )
+    ).rows.map((r) => r.column_name as string);
+    expect(columns.some((c) => /caption|image|media|video|thumbnail/.test(c))).toBe(false);
+  });
+
+  it('saving the same post again updates it instead of duplicating', async () => {
+    const spot = await seedSpot(db, {
+      name: 'Tagged Fort',
+      category: 'fort',
+      lat: 15.53,
+      lng: 73.83,
+    });
+    await save(spot, 'https://www.instagram.com/p/Same123/', 'first.handle');
+    await save(spot, 'https://www.instagram.com/p/Same123/?x=1', 'second.handle', 'Updated.');
+    expect((await posts(spot)).map((p) => [p.creator_handle, p.note])).toEqual([
+      ['second.handle', 'Updated.'],
+    ]);
+  });
+
+  it('rejects profiles, stories, other sites and bad handles', async () => {
+    const spot = await seedSpot(db, { name: 'Strict Place', lat: 15.54, lng: 73.84 });
+    for (const url of [
+      'https://www.instagram.com/goa.frames/',
+      'https://www.instagram.com/stories/x/123/',
+      'https://example.com/p/abc/',
+      'https://www.instagram.com.evil.test/p/abc/',
+      'javascript:alert(1)',
+    ]) {
+      await expect(save(spot, url)).rejects.toThrow(/invalid_instagram_post_url/);
+    }
+    await expect(save(spot, 'https://www.instagram.com/p/Ok123/', 'not a handle!')).rejects.toThrow(
+      /invalid_instagram_handle/,
+    );
+  });
+
+  it('is hidden for places that are not public, and only reviewers can add or remove', async () => {
+    const draft = await seedSpot(db, {
+      name: 'Draft With Post',
+      lat: 15.55,
+      lng: 73.85,
+      status: 'draft',
+    });
+    const id = await save(draft, 'https://www.instagram.com/p/Hidden1/', 'someone');
+    expect(await posts(draft)).toEqual([]);
+    await expect(
+      call(db, 'anon', null, 'public.admin_save_social_post', [
+        draft,
+        'https://www.instagram.com/p/Nope1/',
+        null,
+        null,
+      ]),
+    ).rejects.toThrow(/permission denied/);
+    await expect(rpc(db, 'anon', null, `select * from public.spot_social_posts`)).rejects.toThrow(
+      /permission denied/,
+    );
+    await call(db, 'authenticated', adminId, 'public.admin_delete_social_post', [id]);
+    expect(
+      (
+        await db.query(`select count(*)::int n from public.spot_social_posts where spot_id = $1`, [
+          draft,
+        ])
+      ).rows[0].n,
+    ).toBe(0);
+    const audit = (
+      await db.query(
+        `select action from public.admin_audit_logs where entity_type = 'spot_social_post' and entity_id = $1 order by id`,
+        [id],
+      )
+    ).rows.map((r) => r.action);
+    expect(audit).toEqual(['social_post.save', 'social_post.delete']);
+  });
+});

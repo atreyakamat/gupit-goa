@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AppText, Button, Chip, Field, Notice, Row, Screen, Section } from '@/components/ui';
 import { track } from '@/lib/analytics';
 import { api } from '@/lib/api';
+import { isPreviewMode } from '@/lib/env';
 import { colors } from '@/theme/tokens';
 
 /** Sends a private note to the review team. There are no public comments in this app. */
@@ -69,10 +70,15 @@ export default function Report() {
           You have sent several reports in the last hour. Please try again later.
         </Notice>
       ) : null}
+      {isPreviewMode ? (
+        <Notice>
+          Preview build: reports are switched off because there is no backend to send to.
+        </Notice>
+      ) : null}
       <Button
         label="Send report"
         icon="send-outline"
-        disabled={!type}
+        disabled={!type || isPreviewMode}
         loading={state === 'sending'}
         onPress={() => void send()}
       />

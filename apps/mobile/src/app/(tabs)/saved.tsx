@@ -47,7 +47,15 @@ export default function Saved() {
             <EmptyState
               icon="bookmark-outline"
               title="Nothing saved yet"
-              body="Save places to a list and they stay on this phone, readable offline. No account needed."
+              body="Tap the bookmark on any place to save it. Lists stay on this phone and work offline. No account needed."
+              action={
+                <Button
+                  label="Find places"
+                  kind="secondary"
+                  icon="compass-outline"
+                  onPress={() => router.push('/(tabs)')}
+                />
+              }
             />
           }
           renderItem={({ item }) => (

@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import {
   DISCOVERY_LABEL_TEXT,
   cardCrowdLabel,
@@ -11,11 +10,13 @@ import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { mediaUrl } from '@/lib/api';
 import { colors, elevation, radius, spacing } from '@/theme/tokens';
+import { CategoryArt } from './CategoryArt';
 import { AppText, Badge } from './ui';
 
 export interface SpotCardData {
   slug: string;
   name: string;
+  category_slug?: string | null;
   category_label: string;
   locality: string | null;
   discovery_labels: string[];
@@ -88,9 +89,7 @@ export const SpotCard = memo(function SpotCard({
           accessible={false}
         />
       ) : (
-        <View style={[styles.thumb, styles.thumbEmpty]}>
-          <Ionicons name="image-outline" size={22} color={colors.inkFaint} />
-        </View>
+        <CategoryArt categorySlug={spot.category_slug} size={34} style={styles.thumb} />
       )}
       <View style={styles.body}>
         <AppText variant="subheading" numberOfLines={2}>
@@ -141,8 +140,7 @@ const styles = StyleSheet.create({
     ...elevation.card,
   },
   pressed: { opacity: 0.75 },
-  thumb: { width: 84, height: 84, borderRadius: radius.md, backgroundColor: colors.surfaceMuted },
-  thumbEmpty: { alignItems: 'center', justifyContent: 'center' },
+  thumb: { width: 92, height: 92, borderRadius: radius.md, backgroundColor: colors.surfaceMuted },
   body: { flex: 1, gap: 4 },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs, marginTop: 2 },
 });

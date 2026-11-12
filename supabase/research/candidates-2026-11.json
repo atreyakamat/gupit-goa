@@ -1,0 +1,1455 @@
+[
+  {
+    "candidate_name": "Galgibaga Beach",
+    "dedupe_key": "desk-2026-11:galgibaga-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 3,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://thebetterindia.com/web-stories/things-to-do-in-goa-offbeat-lesser-known-tiracol-fort-querim-beach-sao-joao-festival-bakery-vacation",
+        "publisher": "The Better India",
+        "source_title": "The Better India (accessed 2026-11-12)",
+        "evidence_excerpt": "Quiet Canacona beach; Olive Ridley turtle nesting ground.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.tripoto.com/goa/trips/a-complete-guide-to-south-goa-65387012bc4cf",
+        "publisher": "Tripoto",
+        "source_title": "Tripoto (accessed 2026-11-12)",
+        "evidence_excerpt": "About 8 km south of Palolem; turtle season roughly October to March.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.outlooktraveller.com/destinations/india/5-beaches-in-south-goa-you-didnt-know-about",
+        "publisher": "Outlook Traveller",
+        "source_title": "Outlook Traveller (accessed 2026-11-12)",
+        "evidence_excerpt": "Beside the Galgibaga river; road access and parking.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Butterfly Beach",
+    "dedupe_key": "desk-2026-11:butterfly-beach",
+    "proposed_category_slug": "beach-access",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://lbb.in/goa/best-beaches-in-south-goa",
+        "publisher": "LBB",
+        "source_title": "LBB (accessed 2026-11-12)",
+        "evidence_excerpt": "No facilities; reached by boat from Palolem or Agonda.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Cola Beach",
+    "dedupe_key": "desk-2026-11:cola-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://lbb.in/goa/best-beaches-in-south-goa",
+        "publisher": "LBB",
+        "source_title": "LBB (accessed 2026-11-12)",
+        "evidence_excerpt": "Short cliff-side jungle walk to reach it.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://indiasomeday.com/?p=67646",
+        "publisher": "India Someday",
+        "source_title": "India Someday (accessed 2026-11-12)",
+        "evidence_excerpt": "Limited mobile network and very few shacks.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Kakolem Beach",
+    "dedupe_key": "desk-2026-11:kakolem-beach",
+    "proposed_category_slug": "beach-access",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://bizgoa.heloix.com/blog/hidden-gems-goa-offbeat-places-to-visit",
+        "publisher": "BizGoa",
+        "source_title": "BizGoa (accessed 2026-11-12)",
+        "evidence_excerpt": "Also called Tiger Beach; steep trek or boat only.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.myticketstoindia.com/tourism-in-india/goa/hidden-gems/",
+        "publisher": "MyTicketsToIndia",
+        "source_title": "MyTicketsToIndia (accessed 2026-11-12)",
+        "evidence_excerpt": "Small cove between cliffs with a sharp descent.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Agonda Beach",
+    "dedupe_key": "desk-2026-11:agonda-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Agonda",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://lbb.in/goa/best-beaches-in-south-goa",
+        "publisher": "LBB",
+        "source_title": "LBB (accessed 2026-11-12)",
+        "evidence_excerpt": "Clean beach with a mix of quiet stretches, shops and eateries.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.myticketstoindia.com/tourism-in-india/goa/hidden-gems/",
+        "publisher": "MyTicketsToIndia",
+        "source_title": "MyTicketsToIndia (accessed 2026-11-12)",
+        "evidence_excerpt": "A turtle nesting beach protected by volunteers.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Patnem Beach",
+    "dedupe_key": "desk-2026-11:patnem-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://indiasomeday.com/?p=67646",
+        "publisher": "India Someday",
+        "source_title": "India Someday (accessed 2026-11-12)",
+        "evidence_excerpt": "Small, calmer beach south of Palolem.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.tripoto.com/goa/trips/a-complete-guide-to-south-goa-65387012bc4cf",
+        "publisher": "Tripoto",
+        "source_title": "Tripoto (accessed 2026-11-12)",
+        "evidence_excerpt": "Listed among the beaches just south of Palolem.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Palolem Beach",
+    "dedupe_key": "desk-2026-11:palolem-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.tripoto.com/goa/trips/a-complete-guide-to-south-goa-65387012bc4cf",
+        "publisher": "Tripoto",
+        "source_title": "Tripoto (accessed 2026-11-12)",
+        "evidence_excerpt": "Hub for reaching nearby quieter beaches; known for sunsets.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Benaulim Beach",
+    "dedupe_key": "desk-2026-11:benaulim-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "south",
+    "proposed_locality": "Benaulim",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://indiasomeday.com/?p=67646",
+        "publisher": "India Someday",
+        "source_title": "India Someday (accessed 2026-11-12)",
+        "evidence_excerpt": "Included in a list of Goa beaches away from the crowds.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Querim (Keri) Beach",
+    "dedupe_key": "desk-2026-11:querim-keri-beach",
+    "proposed_category_slug": "beach",
+    "proposed_region": "north",
+    "proposed_locality": "Querim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://thebetterindia.com/web-stories/things-to-do-in-goa-offbeat-lesser-known-tiracol-fort-querim-beach-sao-joao-festival-bakery-vacation",
+        "publisher": "The Better India",
+        "source_title": "The Better India (accessed 2026-11-12)",
+        "evidence_excerpt": "Northernmost large beach with rocky outcrops.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://hippie-inheels.com/5-quiet-goa-beaches/",
+        "publisher": "Hippie in Heels",
+        "source_title": "Hippie in Heels (accessed 2026-11-12)",
+        "evidence_excerpt": "Far north, near the Maharashtra border and Tiracol Fort.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Tiracol Fort",
+    "dedupe_key": "desk-2026-11:tiracol-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "north",
+    "proposed_locality": "Tiracol",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://thebetterindia.com/web-stories/things-to-do-in-goa-offbeat-lesser-known-tiracol-fort-querim-beach-sao-joao-festival-bakery-vacation",
+        "publisher": "The Better India",
+        "source_title": "The Better India (accessed 2026-11-12)",
+        "evidence_excerpt": "Listed as an offbeat stop in the far north.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Chapora Fort",
+    "dedupe_key": "desk-2026-11:chapora-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "north",
+    "proposed_locality": "Chapora",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.gomantaktimes.com/my-goa/things-to-do/top-8-must-see-forts-in-goa",
+        "publisher": "Gomantak Times",
+        "source_title": "Gomantak Times (accessed 2026-11-12)",
+        "evidence_excerpt": "First on a local newspaper list of forts worth visiting.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Aguada Fort",
+    "dedupe_key": "desk-2026-11:aguada-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "north",
+    "proposed_locality": "Candolim",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.gomantaktimes.com/my-goa/things-to-do/top-8-must-see-forts-in-goa",
+        "publisher": "Gomantak Times",
+        "source_title": "Gomantak Times (accessed 2026-11-12)",
+        "evidence_excerpt": "Named among the must-see forts.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      },
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://iffigoa.org/goa-tourist-places",
+        "publisher": "IFFI Goa",
+        "source_title": "IFFI Goa (accessed 2026-11-12)",
+        "evidence_excerpt": "Listed under forts on a state festival visitor page.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Sinquerim Fort",
+    "dedupe_key": "desk-2026-11:sinquerim-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "north",
+    "proposed_locality": "Sinquerim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://bizgoa.heloix.com/blog/hidden-gems-goa-offbeat-places-to-visit",
+        "publisher": "BizGoa",
+        "source_title": "BizGoa (accessed 2026-11-12)",
+        "evidence_excerpt": "Overlooks Sinquerim Beach; sea views. Check whether this duplicates Aguada lower fort.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Reis Magos Fort",
+    "dedupe_key": "desk-2026-11:reis-magos-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "north",
+    "proposed_locality": "Reis Magos",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.justwravel.com/blog/offbeat-places-to-visit-in-goa/?noamp=mobile",
+        "publisher": "JustWravel",
+        "source_title": "JustWravel (accessed 2026-11-12)",
+        "evidence_excerpt": "Village fort on the north bank of the Mandovi in Bardez.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Alorna Fort",
+    "dedupe_key": "desk-2026-11:alorna-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "inland",
+    "proposed_locality": null,
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "directory",
+        "source_url": "https://en.wikipedia.org/wiki/Tourism_in_Goa",
+        "publisher": "Wikipedia",
+        "source_title": "Wikipedia (accessed 2026-11-12)",
+        "evidence_excerpt": "Named in the list of Goa forts.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Cabo de Rama Fort",
+    "dedupe_key": "desk-2026-11:cabo-de-rama-fort",
+    "proposed_category_slug": "fort",
+    "proposed_region": "south",
+    "proposed_locality": "Canacona",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://outlooktraveller.com/destinations/india/5-offbeat-adventures-to-elevate-your-goa-trip",
+        "publisher": "Outlook Traveller",
+        "source_title": "Outlook Traveller (accessed 2026-11-12)",
+        "evidence_excerpt": "Southern headland fort with wide views.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Arvalem Caves",
+    "dedupe_key": "desk-2026-11:arvalem-caves",
+    "proposed_category_slug": "heritage-site",
+    "proposed_region": "inland",
+    "proposed_locality": "Sanquelim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://outlooktraveller.com/destinations/india/5-offbeat-adventures-to-elevate-your-goa-trip",
+        "publisher": "Outlook Traveller",
+        "source_title": "Outlook Traveller (accessed 2026-11-12)",
+        "evidence_excerpt": "Rock-cut caves near Sanquelim dated to about the 6th century.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Arvalem Waterfall",
+    "dedupe_key": "desk-2026-11:arvalem-waterfall",
+    "proposed_category_slug": "waterfall",
+    "proposed_region": "inland",
+    "proposed_locality": "Sanquelim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "directory",
+        "source_url": "https://en.wikipedia.org/wiki/Tourism_in_Goa",
+        "publisher": "Wikipedia",
+        "source_title": "Wikipedia (accessed 2026-11-12)",
+        "evidence_excerpt": "Named in the list of Goa waterfalls.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Lamgau Caves",
+    "dedupe_key": "desk-2026-11:lamgau-caves",
+    "proposed_category_slug": "heritage-site",
+    "proposed_region": "inland",
+    "proposed_locality": "Bicholim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://caravelabeachresortgoa.com/blog/offbeat-things-to-do-in-goa.html",
+        "publisher": "Caravela Beach Resort blog",
+        "source_title": "Caravela Beach Resort blog (accessed 2026-11-12)",
+        "evidence_excerpt": "Lesser-known caves located in Bicholim.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 2
+      }
+    ]
+  },
+  {
+    "candidate_name": "Tambdi Surla Waterfall",
+    "dedupe_key": "desk-2026-11:tambdi-surla-waterfall",
+    "proposed_category_slug": "waterfall",
+    "proposed_region": "inland",
+    "proposed_locality": null,
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "directory",
+        "source_url": "https://en.wikipedia.org/wiki/Tourism_in_Goa",
+        "publisher": "Wikipedia",
+        "source_title": "Wikipedia (accessed 2026-11-12)",
+        "evidence_excerpt": "Named in the list of Goa waterfalls. Trek access and season need checking.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Dudhsagar Falls",
+    "dedupe_key": "desk-2026-11:dudhsagar-falls",
+    "proposed_category_slug": "waterfall",
+    "proposed_region": "inland",
+    "proposed_locality": "Collem",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.nationalgeographic.com/travel/article/what-to-see-and-do-in-goa-beyond-the-beach",
+        "publisher": "National Geographic",
+        "source_title": "National Geographic (accessed 2026-11-12)",
+        "evidence_excerpt": "Four-tier waterfall in the Western Ghats; strongest in monsoon.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.planetware.com/india/top-rated-tourist-attractions-in-goa-ind-1-29.htm",
+        "publisher": "PlanetWare",
+        "source_title": "PlanetWare (accessed 2026-11-12)",
+        "evidence_excerpt": "Reached via Colem village by taxi or train.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Bhagwan Mahavir Wildlife Sanctuary",
+    "dedupe_key": "desk-2026-11:bhagwan-mahavir-wildlife-sanctuary",
+    "proposed_category_slug": "nature-reserve",
+    "proposed_region": "inland",
+    "proposed_locality": "Mollem",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.nationalgeographic.com/travel/article/what-to-see-and-do-in-goa-beyond-the-beach",
+        "publisher": "National Geographic",
+        "source_title": "National Geographic (accessed 2026-11-12)",
+        "evidence_excerpt": "Recommended for wildlife spotting inland.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Kesarval Spring",
+    "dedupe_key": "desk-2026-11:kesarval-spring",
+    "proposed_category_slug": "spring",
+    "proposed_region": "central",
+    "proposed_locality": "Cortalim",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html",
+        "publisher": "Incredible India (Ministry of Tourism)",
+        "source_title": "Incredible India (Ministry of Tourism) (accessed 2026-11-12)",
+        "evidence_excerpt": "Spring near Cortalim village, about 22 km from Panaji.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Fontainhas Latin Quarter",
+    "dedupe_key": "desk-2026-11:fontainhas-latin-quarter",
+    "proposed_category_slug": "historic-precinct",
+    "proposed_region": "central",
+    "proposed_locality": "Panaji",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://outlooktraveller.com/destinations/india/5-offbeat-adventures-to-elevate-your-goa-trip",
+        "publisher": "Outlook Traveller",
+        "source_title": "Outlook Traveller (accessed 2026-11-12)",
+        "evidence_excerpt": "Old quarter of Panaji known for its history and architecture.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      },
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.nationalgeographic.com/travel/article/what-to-see-and-do-in-goa-beyond-the-beach",
+        "publisher": "National Geographic",
+        "source_title": "National Geographic (accessed 2026-11-12)",
+        "evidence_excerpt": "Narrow lanes of Portuguese-era houses; good on foot.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Chapel of Our Lady of the Mount",
+    "dedupe_key": "desk-2026-11:chapel-of-our-lady-of-the-mount",
+    "proposed_category_slug": "heritage-site",
+    "proposed_region": "central",
+    "proposed_locality": "Old Goa",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://outlooktraveller.com/destinations/india/5-offbeat-adventures-to-elevate-your-goa-trip",
+        "publisher": "Outlook Traveller",
+        "source_title": "Outlook Traveller (accessed 2026-11-12)",
+        "evidence_excerpt": "Named as one of the quieter churches worth visiting.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Basilica of Bom Jesus",
+    "dedupe_key": "desk-2026-11:basilica-of-bom-jesus",
+    "proposed_category_slug": "heritage-site",
+    "proposed_region": "central",
+    "proposed_locality": "Old Goa",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://iffigoa.org/goa-tourist-places",
+        "publisher": "IFFI Goa",
+        "source_title": "IFFI Goa (accessed 2026-11-12)",
+        "evidence_excerpt": "Listed under UNESCO heritage monuments.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Divar Island",
+    "dedupe_key": "desk-2026-11:divar-island",
+    "proposed_category_slug": "village-attraction",
+    "proposed_region": "central",
+    "proposed_locality": "Divar",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://thebetterindia.com/web-stories/things-to-do-in-goa-offbeat-lesser-known-tiracol-fort-querim-beach-sao-joao-festival-bakery-vacation",
+        "publisher": "The Better India",
+        "source_title": "The Better India (accessed 2026-11-12)",
+        "evidence_excerpt": "First on a list of offbeat things to do.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Goa State Museum",
+    "dedupe_key": "desk-2026-11:goa-state-museum",
+    "proposed_category_slug": "museum",
+    "proposed_region": "central",
+    "proposed_locality": "Panaji",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "directory",
+        "source_url": "https://en.wikipedia.org/wiki/Tourism_in_Goa",
+        "publisher": "Wikipedia",
+        "source_title": "Wikipedia (accessed 2026-11-12)",
+        "evidence_excerpt": "State museum set up in 1996 for Goan history and culture.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Naval Aviation Museum",
+    "dedupe_key": "desk-2026-11:naval-aviation-museum",
+    "proposed_category_slug": "museum",
+    "proposed_region": "south",
+    "proposed_locality": "Vasco da Gama",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "directory",
+        "source_url": "https://en.wikipedia.org/wiki/Tourism_in_Goa",
+        "publisher": "Wikipedia",
+        "source_title": "Wikipedia (accessed 2026-11-12)",
+        "evidence_excerpt": "Aircraft on display, including a Sea Harrier.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Sahakari Spice Farm",
+    "dedupe_key": "desk-2026-11:sahakari-spice-farm",
+    "proposed_category_slug": "spice-farm",
+    "proposed_region": "inland",
+    "proposed_locality": "Ponda",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 2,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.nationalgeographic.com/travel/article/what-to-see-and-do-in-goa-beyond-the-beach",
+        "publisher": "National Geographic",
+        "source_title": "National Geographic (accessed 2026-11-12)",
+        "evidence_excerpt": "Guided walk through the plantation with lunch.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      },
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html",
+        "publisher": "Incredible India (Ministry of Tourism)",
+        "source_title": "Incredible India (Ministry of Tourism) (accessed 2026-11-12)",
+        "evidence_excerpt": "Named among well-known spice plantations.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Savoi Plantation",
+    "dedupe_key": "desk-2026-11:savoi-plantation",
+    "proposed_category_slug": "spice-farm",
+    "proposed_region": "inland",
+    "proposed_locality": "Ponda",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html",
+        "publisher": "Incredible India (Ministry of Tourism)",
+        "source_title": "Incredible India (Ministry of Tourism) (accessed 2026-11-12)",
+        "evidence_excerpt": "Named among well-known spice plantations.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Tropical Spice Plantation",
+    "dedupe_key": "desk-2026-11:tropical-spice-plantation",
+    "proposed_category_slug": "spice-farm",
+    "proposed_region": "inland",
+    "proposed_locality": "Ponda",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html",
+        "publisher": "Incredible India (Ministry of Tourism)",
+        "source_title": "Incredible India (Ministry of Tourism) (accessed 2026-11-12)",
+        "evidence_excerpt": "Named among well-known spice plantations.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Pascoal Spice Village",
+    "dedupe_key": "desk-2026-11:pascoal-spice-village",
+    "proposed_category_slug": "spice-farm",
+    "proposed_region": "inland",
+    "proposed_locality": "Ponda",
+    "proposed_labels": [
+      "popular"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "tourism_public",
+        "source_url": "https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html",
+        "publisher": "Incredible India (Ministry of Tourism)",
+        "source_title": "Incredible India (Ministry of Tourism) (accessed 2026-11-12)",
+        "evidence_excerpt": "Named among well-known spice plantations.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 5
+      }
+    ]
+  },
+  {
+    "candidate_name": "Tanshikar Spice Farm",
+    "dedupe_key": "desk-2026-11:tanshikar-spice-farm",
+    "proposed_category_slug": "spice-farm",
+    "proposed_region": "south",
+    "proposed_locality": "Netravali",
+    "proposed_labels": [
+      "lesser_known"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.planetware.com/india/top-rated-tourist-attractions-in-goa-ind-1-29.htm",
+        "publisher": "PlanetWare",
+        "source_title": "PlanetWare (accessed 2026-11-12)",
+        "evidence_excerpt": "Working spice farm with an eco rest house; tours offered.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  },
+  {
+    "candidate_name": "Mapusa Municipal Market",
+    "dedupe_key": "desk-2026-11:mapusa-municipal-market",
+    "proposed_category_slug": "market",
+    "proposed_region": "north",
+    "proposed_locality": "Mapusa",
+    "proposed_labels": [
+      "local_favourite"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.lonelyplanet.com/articles/top-things-to-do-in-goa",
+        "publisher": "Lonely Planet",
+        "source_title": "Lonely Planet (accessed 2026-11-12)",
+        "evidence_excerpt": "Recommended for food souvenirs and local produce.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 4
+      }
+    ]
+  },
+  {
+    "candidate_name": "Anjuna Flea Market",
+    "dedupe_key": "desk-2026-11:anjuna-flea-market",
+    "proposed_category_slug": "market",
+    "proposed_region": "north",
+    "proposed_locality": "Anjuna",
+    "proposed_labels": [
+      "iconic"
+    ],
+    "confidence_score": 60,
+    "confidence_breakdown": {
+      "method": "desk_research",
+      "sources": 1,
+      "location": "not_supplied"
+    },
+    "schema_version": "desk-1",
+    "extracted_fields": {
+      "needs": [
+        "pin location on the map",
+        "access and safety notes",
+        "on-the-ground check"
+      ]
+    },
+    "sources": [
+      {
+        "source_type": "editorial",
+        "source_url": "https://www.planetware.com/india/top-rated-tourist-attractions-in-goa-ind-1-29.htm",
+        "publisher": "PlanetWare",
+        "source_title": "PlanetWare (accessed 2026-11-12)",
+        "evidence_excerpt": "Described as the liveliest market with the widest range.",
+        "claims_supported": [
+          "existence"
+        ],
+        "source_quality": 3
+      }
+    ]
+  }
+]

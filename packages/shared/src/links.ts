@@ -66,3 +66,44 @@ export function buildShareMessage(spot: ShareableSpot): string {
   lines.push('Found on Gupit Goa');
   return lines.join('\n');
 }
+
+const INSTAGRAM_POST = /^https:\/\/(www\.)?instagram\.com\/(p|reel|reels|tv)\/[A-Za-z0-9_-]+\/?$/;
+
+/**
+ * Accepts a pasted Instagram post or reel link and returns it without tracking parameters,
+ * or null if it is not a post link. Profile, story and non-Instagram links are rejected.
+ */
+export function normaliseInstagramPostUrl(input: string): string | null {
+  const trimmed = input
+    .trim()
+    .replace(/[?#].*$/, '')
+    .replace(/^http:\/\//i, 'https://');
+  const withHost = trimmed.replace(/^https:\/\/(m\.)?instagram\.com/i, 'https://www.instagram.com');
+  const withSlash = withHost.endsWith('/') ? withHost : `${withHost}/`;
+  return INSTAGRAM_POST.test(withSlash) ? withSlash : null;
+}
+
+/** "@Some.Creator " -> "some.creator". Null if it cannot be an Instagram handle. */
+export function normaliseInstagramHandle(input: string): string | null {
+  const handle = input.trim().replace(/^@/, '').toLowerCase();
+  return /^[a-z0-9._]{1,30}$/.test(handle) ? handle : null;
+}
+
+export function instagramProfileUrl(handle: string): string {
+  return `https://www.instagram.com/${handle}/`;
+}
+
+/** Splits a credit line into plain text and tappable @handles: "Photo by @goa.frames". */
+export function splitCreditLine(credit: string): { text: string; handle: string | null }[] {
+  const parts: { text: string; handle: string | null }[] = [];
+  let last = 0;
+  for (const match of credit.matchAll(/@([A-Za-z0-9._]{1,30})/g)) {
+    const start = match.index ?? 0;
+    if (start > last) parts.push({ text: credit.slice(last, start), handle: null });
+    const handle = match[1]!.replace(/\.+$/, '');
+    parts.push({ text: `@${handle}`, handle: handle.toLowerCase() });
+    last = start + 1 + handle.length;
+  }
+  if (last < credit.length) parts.push({ text: credit.slice(last), handle: null });
+  return parts;
+}

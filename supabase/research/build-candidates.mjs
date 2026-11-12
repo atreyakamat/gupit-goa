@@ -1,0 +1,452 @@
+// Builds candidates-2026-11.json and .sql from the compact table below.
+// Run: node supabase/research/build-candidates.mjs
+//
+// Every row is a LEAD for human review, never a published place:
+//   * no coordinates are supplied, so a reviewer must place the pin;
+//   * the evidence note is our own short summary of what the source supports;
+//   * score 60 lands each one in "needs more evidence" in the admin queue.
+import { writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const S = {
+  tbi: [
+    'https://thebetterindia.com/web-stories/things-to-do-in-goa-offbeat-lesser-known-tiracol-fort-querim-beach-sao-joao-festival-bakery-vacation',
+    'The Better India',
+    'editorial',
+    3,
+  ],
+  lbb: ['https://lbb.in/goa/best-beaches-in-south-goa', 'LBB', 'editorial', 3],
+  biz: [
+    'https://bizgoa.heloix.com/blog/hidden-gems-goa-offbeat-places-to-visit',
+    'BizGoa',
+    'editorial',
+    2,
+  ],
+  ot5: [
+    'https://outlooktraveller.com/destinations/india/5-offbeat-adventures-to-elevate-your-goa-trip',
+    'Outlook Traveller',
+    'editorial',
+    4,
+  ],
+  ots: [
+    'https://www.outlooktraveller.com/destinations/india/5-beaches-in-south-goa-you-didnt-know-about',
+    'Outlook Traveller',
+    'editorial',
+    4,
+  ],
+  jw: [
+    'https://www.justwravel.com/blog/offbeat-places-to-visit-in-goa/?noamp=mobile',
+    'JustWravel',
+    'editorial',
+    2,
+  ],
+  ii: [
+    'https://prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/goa/Listicles/things-to-do.html',
+    'Incredible India (Ministry of Tourism)',
+    'tourism_public',
+    5,
+  ],
+  ng: [
+    'https://www.nationalgeographic.com/travel/article/what-to-see-and-do-in-goa-beyond-the-beach',
+    'National Geographic',
+    'editorial',
+    5,
+  ],
+  lp: [
+    'https://www.lonelyplanet.com/articles/top-things-to-do-in-goa',
+    'Lonely Planet',
+    'editorial',
+    4,
+  ],
+  pw: [
+    'https://www.planetware.com/india/top-rated-tourist-attractions-in-goa-ind-1-29.htm',
+    'PlanetWare',
+    'editorial',
+    3,
+  ],
+  trip: [
+    'https://www.tripoto.com/goa/trips/a-complete-guide-to-south-goa-65387012bc4cf',
+    'Tripoto',
+    'editorial',
+    2,
+  ],
+  isd: ['https://indiasomeday.com/?p=67646', 'India Someday', 'editorial', 3],
+  hh: ['https://hippie-inheels.com/5-quiet-goa-beaches/', 'Hippie in Heels', 'editorial', 3],
+  wiki: ['https://en.wikipedia.org/wiki/Tourism_in_Goa', 'Wikipedia', 'directory', 3],
+  gt: [
+    'https://www.gomantaktimes.com/my-goa/things-to-do/top-8-must-see-forts-in-goa',
+    'Gomantak Times',
+    'editorial',
+    4,
+  ],
+  car: [
+    'https://caravelabeachresortgoa.com/blog/offbeat-things-to-do-in-goa.html',
+    'Caravela Beach Resort blog',
+    'editorial',
+    2,
+  ],
+  iffi: ['https://iffigoa.org/goa-tourist-places', 'IFFI Goa', 'tourism_public', 4],
+  mti: [
+    'https://www.myticketstoindia.com/tourism-in-india/goa/hidden-gems/',
+    'MyTicketsToIndia',
+    'editorial',
+    2,
+  ],
+};
+
+// name | category | region | locality | labels | [source key, what the source supports]...
+const ROWS = [
+  [
+    'Galgibaga Beach',
+    'beach',
+    'south',
+    'Canacona',
+    'lesser_known',
+    ['tbi', 'Quiet Canacona beach; Olive Ridley turtle nesting ground.'],
+    ['trip', 'About 8 km south of Palolem; turtle season roughly October to March.'],
+    ['ots', 'Beside the Galgibaga river; road access and parking.'],
+  ],
+  [
+    'Butterfly Beach',
+    'beach-access',
+    'south',
+    'Canacona',
+    'lesser_known',
+    ['lbb', 'No facilities; reached by boat from Palolem or Agonda.'],
+  ],
+  [
+    'Cola Beach',
+    'beach',
+    'south',
+    'Canacona',
+    'lesser_known',
+    ['lbb', 'Short cliff-side jungle walk to reach it.'],
+    ['isd', 'Limited mobile network and very few shacks.'],
+  ],
+  [
+    'Kakolem Beach',
+    'beach-access',
+    'south',
+    'Canacona',
+    'lesser_known',
+    ['biz', 'Also called Tiger Beach; steep trek or boat only.'],
+    ['mti', 'Small cove between cliffs with a sharp descent.'],
+  ],
+  [
+    'Agonda Beach',
+    'beach',
+    'south',
+    'Agonda',
+    'popular',
+    ['lbb', 'Clean beach with a mix of quiet stretches, shops and eateries.'],
+    ['mti', 'A turtle nesting beach protected by volunteers.'],
+  ],
+  [
+    'Patnem Beach',
+    'beach',
+    'south',
+    'Canacona',
+    'popular',
+    ['isd', 'Small, calmer beach south of Palolem.'],
+    ['trip', 'Listed among the beaches just south of Palolem.'],
+  ],
+  [
+    'Palolem Beach',
+    'beach',
+    'south',
+    'Canacona',
+    'iconic',
+    ['trip', 'Hub for reaching nearby quieter beaches; known for sunsets.'],
+  ],
+  [
+    'Benaulim Beach',
+    'beach',
+    'south',
+    'Benaulim',
+    'popular',
+    ['isd', 'Included in a list of Goa beaches away from the crowds.'],
+  ],
+  [
+    'Querim (Keri) Beach',
+    'beach',
+    'north',
+    'Querim',
+    'lesser_known',
+    ['tbi', 'Northernmost large beach with rocky outcrops.'],
+    ['hh', 'Far north, near the Maharashtra border and Tiracol Fort.'],
+  ],
+  [
+    'Tiracol Fort',
+    'fort',
+    'north',
+    'Tiracol',
+    'lesser_known',
+    ['tbi', 'Listed as an offbeat stop in the far north.'],
+  ],
+  [
+    'Chapora Fort',
+    'fort',
+    'north',
+    'Chapora',
+    'iconic',
+    ['gt', 'First on a local newspaper list of forts worth visiting.'],
+  ],
+  [
+    'Aguada Fort',
+    'fort',
+    'north',
+    'Candolim',
+    'iconic',
+    ['gt', 'Named among the must-see forts.'],
+    ['iffi', 'Listed under forts on a state festival visitor page.'],
+  ],
+  [
+    'Sinquerim Fort',
+    'fort',
+    'north',
+    'Sinquerim',
+    'lesser_known',
+    [
+      'biz',
+      'Overlooks Sinquerim Beach; sea views. Check whether this duplicates Aguada lower fort.',
+    ],
+  ],
+  [
+    'Reis Magos Fort',
+    'fort',
+    'north',
+    'Reis Magos',
+    'lesser_known',
+    ['jw', 'Village fort on the north bank of the Mandovi in Bardez.'],
+  ],
+  [
+    'Alorna Fort',
+    'fort',
+    'inland',
+    null,
+    'lesser_known',
+    ['wiki', 'Named in the list of Goa forts.'],
+  ],
+  [
+    'Cabo de Rama Fort',
+    'fort',
+    'south',
+    'Canacona',
+    'lesser_known',
+    ['ot5', 'Southern headland fort with wide views.'],
+  ],
+  [
+    'Arvalem Caves',
+    'heritage-site',
+    'inland',
+    'Sanquelim',
+    'lesser_known',
+    ['ot5', 'Rock-cut caves near Sanquelim dated to about the 6th century.'],
+  ],
+  [
+    'Arvalem Waterfall',
+    'waterfall',
+    'inland',
+    'Sanquelim',
+    'lesser_known',
+    ['wiki', 'Named in the list of Goa waterfalls.'],
+  ],
+  [
+    'Lamgau Caves',
+    'heritage-site',
+    'inland',
+    'Bicholim',
+    'lesser_known',
+    ['car', 'Lesser-known caves located in Bicholim.'],
+  ],
+  [
+    'Tambdi Surla Waterfall',
+    'waterfall',
+    'inland',
+    null,
+    'lesser_known',
+    ['wiki', 'Named in the list of Goa waterfalls. Trek access and season need checking.'],
+  ],
+  [
+    'Dudhsagar Falls',
+    'waterfall',
+    'inland',
+    'Collem',
+    'iconic',
+    ['ng', 'Four-tier waterfall in the Western Ghats; strongest in monsoon.'],
+    ['pw', 'Reached via Colem village by taxi or train.'],
+  ],
+  [
+    'Bhagwan Mahavir Wildlife Sanctuary',
+    'nature-reserve',
+    'inland',
+    'Mollem',
+    'popular',
+    ['ng', 'Recommended for wildlife spotting inland.'],
+  ],
+  [
+    'Kesarval Spring',
+    'spring',
+    'central',
+    'Cortalim',
+    'lesser_known',
+    ['ii', 'Spring near Cortalim village, about 22 km from Panaji.'],
+  ],
+  [
+    'Fontainhas Latin Quarter',
+    'historic-precinct',
+    'central',
+    'Panaji',
+    'iconic',
+    ['ot5', 'Old quarter of Panaji known for its history and architecture.'],
+    ['ng', 'Narrow lanes of Portuguese-era houses; good on foot.'],
+  ],
+  [
+    'Chapel of Our Lady of the Mount',
+    'heritage-site',
+    'central',
+    'Old Goa',
+    'lesser_known',
+    ['ot5', 'Named as one of the quieter churches worth visiting.'],
+  ],
+  [
+    'Basilica of Bom Jesus',
+    'heritage-site',
+    'central',
+    'Old Goa',
+    'iconic',
+    ['iffi', 'Listed under UNESCO heritage monuments.'],
+  ],
+  [
+    'Divar Island',
+    'village-attraction',
+    'central',
+    'Divar',
+    'lesser_known',
+    ['tbi', 'First on a list of offbeat things to do.'],
+  ],
+  [
+    'Goa State Museum',
+    'museum',
+    'central',
+    'Panaji',
+    'popular',
+    ['wiki', 'State museum set up in 1996 for Goan history and culture.'],
+  ],
+  [
+    'Naval Aviation Museum',
+    'museum',
+    'south',
+    'Vasco da Gama',
+    'popular',
+    ['wiki', 'Aircraft on display, including a Sea Harrier.'],
+  ],
+  [
+    'Sahakari Spice Farm',
+    'spice-farm',
+    'inland',
+    'Ponda',
+    'popular',
+    ['ng', 'Guided walk through the plantation with lunch.'],
+    ['ii', 'Named among well-known spice plantations.'],
+  ],
+  [
+    'Savoi Plantation',
+    'spice-farm',
+    'inland',
+    'Ponda',
+    'popular',
+    ['ii', 'Named among well-known spice plantations.'],
+  ],
+  [
+    'Tropical Spice Plantation',
+    'spice-farm',
+    'inland',
+    'Ponda',
+    'popular',
+    ['ii', 'Named among well-known spice plantations.'],
+  ],
+  [
+    'Pascoal Spice Village',
+    'spice-farm',
+    'inland',
+    'Ponda',
+    'popular',
+    ['ii', 'Named among well-known spice plantations.'],
+  ],
+  [
+    'Tanshikar Spice Farm',
+    'spice-farm',
+    'south',
+    'Netravali',
+    'lesser_known',
+    ['pw', 'Working spice farm with an eco rest house; tours offered.'],
+  ],
+  [
+    'Mapusa Municipal Market',
+    'market',
+    'north',
+    'Mapusa',
+    'local_favourite',
+    ['lp', 'Recommended for food souvenirs and local produce.'],
+  ],
+  [
+    'Anjuna Flea Market',
+    'market',
+    'north',
+    'Anjuna',
+    'iconic',
+    ['pw', 'Described as the liveliest market with the widest range.'],
+  ],
+];
+
+const slug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+export const candidates = ROWS.map(([name, category, region, locality, label, ...sources]) => ({
+  candidate_name: name,
+  dedupe_key: `desk-2026-11:${slug(name)}`,
+  proposed_category_slug: category,
+  proposed_region: region,
+  proposed_locality: locality,
+  proposed_labels: [label],
+  confidence_score: 60,
+  confidence_breakdown: {
+    method: 'desk_research',
+    sources: sources.length,
+    location: 'not_supplied',
+  },
+  schema_version: 'desk-1',
+  extracted_fields: {
+    needs: ['pin location on the map', 'access and safety notes', 'on-the-ground check'],
+  },
+  sources: sources.map(([key, note]) => ({
+    source_type: S[key][2],
+    source_url: S[key][0],
+    publisher: S[key][1],
+    source_title: `${S[key][1]} (accessed 2026-11-12)`,
+    evidence_excerpt: note,
+    claims_supported: ['existence'],
+    source_quality: S[key][3],
+  })),
+}));
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const here = dirname(fileURLToPath(import.meta.url));
+  writeFileSync(join(here, 'candidates-2026-11.json'), `${JSON.stringify(candidates, null, 2)}\n`);
+  const sql = [
+    '-- Generated by build-candidates.mjs. Loads research leads into the review queue.',
+    '-- Nothing here is published: each row waits for a reviewer in the admin screen.',
+    '-- Safe to run twice (rows are matched on dedupe_key).',
+    ...candidates.map(
+      (c) => `select public.worker_upsert_candidate($gupit$${JSON.stringify(c)}$gupit$::jsonb);`,
+    ),
+    '',
+  ].join('\n');
+  writeFileSync(join(here, 'candidates-2026-11.sql'), sql);
+  console.log(`Wrote ${candidates.length} candidates.`);
+}

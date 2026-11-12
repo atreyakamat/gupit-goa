@@ -16,8 +16,8 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SpotCard } from '@/components/SpotCard';
-import { EmptyState, IconButton } from '@/components/ui';
-import { env } from '@/lib/env';
+import { IconButton } from '@/components/ui';
+import { mapStyleUrl } from '@/lib/env';
 import type { Bounds } from '@/lib/hooks';
 import { colors, spacing } from '@/theme/tokens';
 
@@ -87,21 +87,11 @@ export function SpotMap({
     }
   }, []);
 
-  if (!env.mapStyleUrl) {
-    return (
-      <EmptyState
-        icon="map-outline"
-        title="The map is not set up yet"
-        body="Add a map style URL from a tile provider (EXPO_PUBLIC_MAP_STYLE_URL). The list view works without it."
-      />
-    );
-  }
-
   return (
     <View style={styles.root}>
       <Map
         style={styles.map}
-        mapStyle={env.mapStyleUrl}
+        mapStyle={mapStyleUrl}
         attribution
         logo={false}
         touchPitch={false}
@@ -145,7 +135,16 @@ export function SpotMap({
             id="spot-cluster-count"
             type="symbol"
             filter={['has', 'point_count']}
-            layout={{ 'text-field': ['get', 'point_count_abbreviated'], 'text-size': 13 }}
+            // Use the exact font stack the base style already loads for its own labels, so
+            // the glyphs are guaranteed to exist on the tile provider's font server.
+            layout={{
+              'text-field': ['get', 'point_count_abbreviated'],
+              'text-size': 13,
+              'text-font': ['Noto Sans Regular'],
+              // Counts must always draw, even over the base map's own labels.
+              'text-allow-overlap': true,
+              'text-ignore-placement': true,
+            }}
             paint={{ 'text-color': colors.onPrimary }}
           />
           <Layer

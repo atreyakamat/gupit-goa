@@ -288,3 +288,42 @@ describe('schemas', () => {
     expect(extractedCandidateSchema.safeParse({ ...base, stated_lat: 200 }).success).toBe(false);
   });
 });
+
+describe('instagram links and credits', () => {
+  it('cleans post links and rejects anything that is not a post or reel', async () => {
+    const { normaliseInstagramPostUrl } = await import('./links');
+    expect(normaliseInstagramPostUrl(' https://instagram.com/reel/Cabc_12-x/?igsh=abc ')).toBe(
+      'https://www.instagram.com/reel/Cabc_12-x/',
+    );
+    expect(normaliseInstagramPostUrl('http://m.instagram.com/p/Dxyz789')).toBe(
+      'https://www.instagram.com/p/Dxyz789/',
+    );
+    for (const bad of [
+      'https://www.instagram.com/goa.frames/',
+      'https://www.instagram.com/stories/a/1/',
+      'https://example.com/p/abc/',
+      'https://www.instagram.com.evil.test/p/abc/',
+      'not a link',
+    ]) {
+      expect(normaliseInstagramPostUrl(bad)).toBeNull();
+    }
+  });
+
+  it('normalises handles and makes @mentions in a credit tappable', async () => {
+    const { normaliseInstagramHandle, splitCreditLine, instagramProfileUrl } =
+      await import('./links');
+    expect(normaliseInstagramHandle(' @Goa.Frames ')).toBe('goa.frames');
+    expect(normaliseInstagramHandle('not a handle')).toBeNull();
+    expect(instagramProfileUrl('goa.frames')).toBe('https://www.instagram.com/goa.frames/');
+    expect(splitCreditLine('Shot by @Goa.Frames, used with permission.')).toEqual([
+      { text: 'Shot by ', handle: null },
+      { text: '@Goa.Frames', handle: 'goa.frames' },
+      { text: ', used with permission.', handle: null },
+    ]);
+    expect(splitCreditLine('Team photo')).toEqual([{ text: 'Team photo', handle: null }]);
+    expect(splitCreditLine('@a.b.')).toEqual([
+      { text: '@a.b', handle: 'a.b' },
+      { text: '.', handle: null },
+    ]);
+  });
+});

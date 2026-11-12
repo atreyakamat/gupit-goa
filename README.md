@@ -23,7 +23,7 @@ There is no website, PWA or web admin in this release. Reviewers work in protect
 - **Location is foreground-only and optional.** One reading when the user asks. Never stored.
 - **Crowd levels are evidence, not guesses.** Reports are checked server-side to be within about 300 m. A live level needs 3 different installations in the last 2 hours, one report per installation per place per hour. Views and taps are never crowd data.
 - **A candidate is not a listing.** The research worker can only create candidates. A person approves, completes the checklist and publishes. Every such action is audited.
-- **No scraping of Instagram or similar platforms.** Such links can only be saved by a reviewer as a lead. See `docs/source-policy.md`.
+- **No scraping of Instagram or similar platforms.** A reviewer can link a creator's post to a place (shown as a tagged card that opens Instagram) or save a link as a research lead. Captions, photos and videos are never copied. See `docs/source-policy.md`.
 - **Partner money does not buy placement.** Partner listings are labelled and never affect ranking, crowd data or safety notes.
 - **Secrets stay on the server.** Only `EXPO_PUBLIC_*` values are compiled into the app.
 
@@ -44,10 +44,12 @@ npm run db:local          # starts a throwaway server and prints DATABASE_URL
 DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54329/postgres npm run test:db
 ```
 
-To run the app you need a Supabase project and a map style URL. The step-by-step setup, including creating the first reviewer account, is in [`docs/runbook.md`](docs/runbook.md).
+**Want an APK on your phone?** Follow [`apk.md`](apk.md). CI builds one on every pull request, and it runs with no accounts or keys: the map uses OpenFreeMap, and with no backend configured the app opens in a labelled preview mode with sample places.
+
+For real data you need a Supabase project. The step-by-step setup, including creating the first reviewer account, is in [`docs/runbook.md`](docs/runbook.md).
 
 ```bash
-cp apps/mobile/.env.example apps/mobile/.env   # fill in the three public values
+cp apps/mobile/.env.example apps/mobile/.env   # fill in the two public Supabase values
 cd apps/mobile
 npx expo run:android      # or: npx expo run:ios
 ```

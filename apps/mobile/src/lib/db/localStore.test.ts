@@ -2,33 +2,10 @@ import { DatabaseSync } from 'node:sqlite';
 import type { SpotDetail } from '@gupit/shared';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { describePrivilegedKey, readPublicEnv } from '../envCheck';
-import type { SqlDriver, SqlValue } from './driver';
 import { LOCAL_MIGRATIONS, migrateLocalDb } from './migrations';
+import type { SqlDriver } from './driver';
+import { nodeDriver } from './nodeDriver.testutil';
 import { createLocalStore, type LocalStore } from './repo';
-
-function nodeDriver(db: DatabaseSync): SqlDriver {
-  return {
-    exec: async (sql) => {
-      db.exec(sql);
-    },
-    run: async (sql, params: SqlValue[] = []) => {
-      db.prepare(sql).run(...params);
-    },
-    all: async <T>(sql: string, params: SqlValue[] = []) => db.prepare(sql).all(...params) as T[],
-    first: async <T>(sql: string, params: SqlValue[] = []) =>
-      (db.prepare(sql).get(...params) as T | undefined) ?? null,
-    transaction: async (task) => {
-      db.exec('begin');
-      try {
-        await task();
-        db.exec('commit');
-      } catch (error) {
-        db.exec('rollback');
-        throw error;
-      }
-    },
-  };
-}
 
 const detail = (n: number): SpotDetail => ({
   id: `id-${n}`,

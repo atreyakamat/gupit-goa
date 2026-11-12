@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { PreviewBanner } from '@/components/PreviewBanner';
 import {
   AppText,
   Button,
@@ -11,14 +12,12 @@ import {
   ErrorState,
   IconButton,
   LoadingState,
-  Notice,
   Screen,
 } from '@/components/ui';
 import { SpotList } from '@/features/explore/SpotList';
 import { SpotMap } from '@/features/explore/SpotMap';
 import { useNearMe } from '@/features/explore/useNearMe';
 import { track } from '@/lib/analytics';
-import { isBackendConfigured } from '@/lib/env';
 import { useBrowseCards, useCategories, useViewportCards, type Bounds } from '@/lib/hooks';
 import { useAppStore } from '@/store/app';
 import { colors, spacing } from '@/theme/tokens';
@@ -98,14 +97,9 @@ export default function Explore() {
 
       <OfflineBanner />
 
-      {!isBackendConfigured ? (
-        <View style={styles.padded}>
-          <Notice tone="warning">
-            This build is not connected to a backend yet. Add the Supabase URL and anon key to
-            apps/mobile/.env and rebuild.
-          </Notice>
-        </View>
-      ) : viewMode === 'map' ? (
+      <PreviewBanner />
+
+      {viewMode === 'map' ? (
         <SpotMap
           cards={viewport.data?.cards ?? []}
           fetchedAt={viewport.data?.fetchedAt ?? 0}

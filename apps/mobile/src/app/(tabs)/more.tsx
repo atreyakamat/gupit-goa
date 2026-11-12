@@ -43,12 +43,19 @@ function Item({
 export default function More() {
   const router = useRouter();
   const isAdmin = useAppStore((s) => s.isAdmin);
+  const accountEmail = useAppStore((s) => s.accountEmail);
   return (
     <Screen scroll>
       <AppText variant="title" accessibilityRole="header" style={styles.title}>
         More
       </AppText>
       <View style={styles.group}>
+        <Item
+          icon="person-circle-outline"
+          label={accountEmail ? 'Account' : 'Back up saved places'}
+          detail={accountEmail ?? 'Optional. Sign in to keep your lists when you change phone.'}
+          onPress={() => router.push('/account')}
+        />
         <Item
           icon="shield-checkmark-outline"
           label="Privacy"
@@ -84,7 +91,8 @@ export default function More() {
         )}
       </View>
       <AppText variant="caption" color={colors.inkMuted} style={styles.version}>
-        Gupit Goa {Constants.expoConfig?.version ?? ''} · Map data from OpenStreetMap contributors
+        Gupit Goa {Constants.expoConfig?.version ?? ''} · Map by OpenFreeMap, data from
+        OpenStreetMap contributors
       </AppText>
     </Screen>
   );

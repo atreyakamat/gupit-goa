@@ -33,12 +33,30 @@ export default function Privacy() {
         </Card>
       </Section>
 
-      <Section title="No account, and what stays on your phone">
+      <Section title="No account needed, and what stays on your phone">
         <Card>
           <AppText>Browsing, saving and sharing need no sign-up.</AppText>
           <AppText>
-            Saved lists and offline copies of places are stored only on this phone. They are not
-            uploaded. Deleting the app deletes them.
+            Saved lists and offline copies of places are stored on this phone. Unless you sign in,
+            they are not uploaded, and deleting the app deletes them.
+          </AppText>
+        </Card>
+      </Section>
+
+      <Section title="Optional account">
+        <Card>
+          <AppText>
+            You can sign in with your email to back up your saved lists and get them back on another
+            phone. We send a one-time code; there is no password.
+          </AppText>
+          <AppText>
+            If you sign in, we store your email address and which places are in which list. Nothing
+            else: no location, no browsing history, and your crowd reports are not linked to your
+            account.
+          </AppText>
+          <AppText>
+            You can delete your account and its backup at any time from More, then Account. Your
+            lists stay on this phone.
           </AppText>
         </Card>
       </Section>
