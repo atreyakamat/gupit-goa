@@ -106,7 +106,7 @@ Versions follow the current stable Expo SDK at build time: Expo 58, React Native
 
 ## Environment variables still required
 
-App (`apps/mobile/.env`, public values only): `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_MAP_STYLE_URL`.
+App (`apps/mobile/.env`, public values only): `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY` (leave both empty for preview mode). `EXPO_PUBLIC_MAP_STYLE_URL` is optional.
 
 Worker (root `.env`, server only): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEARCH_CONTACT`, and for real output `SEARCH_PROVIDER` + `SEARCH_PROVIDER_API_KEY`, `LLM_PROVIDER` + `LLM_PROVIDER_API_KEY` + `LLM_MODEL`, optionally `GEOCODER`.
 
