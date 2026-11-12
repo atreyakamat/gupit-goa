@@ -1,0 +1,12 @@
+# Supabase CLI configuration for local development (`supabase start`, `supabase db reset`).
+# Link a hosted project with `supabase link`; never commit keys.
+project_id = "gupit-goa"
+
+[api]
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 200
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
