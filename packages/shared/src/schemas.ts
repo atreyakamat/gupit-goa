@@ -149,6 +149,19 @@ export const crowdSubmitResultSchema = z.object({
 });
 export type CrowdSubmitResult = z.infer<typeof crowdSubmitResultSchema>;
 
+/**
+ * A creator's public Instagram post that a reviewer attached to a place. Only the link,
+ * the handle and the reviewer's own note are stored: never the caption, image or video.
+ */
+export const socialPostSchema = z.object({
+  id: z.string(),
+  platform: z.literal('instagram'),
+  url: z.string(),
+  creator_handle: z.string().nullable(),
+  note: z.string().nullable(),
+});
+export type SocialPost = z.infer<typeof socialPostSchema>;
+
 export const categorySchema = z.object({
   id: z.string(),
   parent_slug: z.string().nullable(),
