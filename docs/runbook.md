@@ -40,13 +40,15 @@ Local stack instead of a hosted project: `npx supabase start` then `npx supabase
 
 ## 2. Map tiles
 
-The app needs a MapLibre style URL from a provider whose terms allow commercial app use (for example MapTiler, Stadia Maps, Protomaps, or your own tile server). Do not use `tile.openstreetmap.org`; the app refuses it. Keep the provider's attribution visible. Restrict the provider key to the app's bundle ID / package name where the provider supports it. Offline map downloads are not built and must not be added unless the provider licenses them.
+Nothing to set up. The app defaults to [OpenFreeMap](https://openfreemap.org)'s public instance (`https://tiles.openfreemap.org/styles/liberty`): OpenStreetMap vector tiles with no API key, no sign-up and no usage cap, and commercial use is allowed. Attribution is shown on the map and under More.
+
+The public instance is offered as-is with no uptime guarantee. Before a large launch, either self-host OpenFreeMap (it is open source) or set `EXPO_PUBLIC_MAP_STYLE_URL` to a provider with an SLA (for example MapTiler, Stadia Maps or Protomaps) and rebuild. Do not use `tile.openstreetmap.org`; the app refuses it. Offline map downloads are not built and must not be added unless the provider licenses them. Consider donating to OpenFreeMap if the app relies on it.
 
 ## 3. Mobile app
 
 ```bash
 cp apps/mobile/.env.example apps/mobile/.env
-# EXPO_PUBLIC_SUPABASE_URL, EXPO_PUBLIC_SUPABASE_ANON_KEY, EXPO_PUBLIC_MAP_STYLE_URL
+# EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY (leave both empty for preview mode)
 cd apps/mobile
 npx expo run:android        # needs Android Studio + a device or emulator
 npx expo run:ios            # needs a Mac with Xcode
@@ -57,7 +59,7 @@ Or build in the cloud with EAS (`eas.json` has development, preview and producti
 ```bash
 npm install -g eas-cli && eas login
 eas init                    # creates the project and sets EAS_PROJECT_ID
-eas env:create              # add the three EXPO_PUBLIC_ values per environment
+eas env:create              # add the two EXPO_PUBLIC_SUPABASE_ values per environment
 eas build --profile development --platform android
 ```
 
@@ -65,12 +67,15 @@ Expo Go cannot run this app (MapLibre is a native module).
 
 Before a store build, change `ios.bundleIdentifier` and `android.package` in `apps/mobile/app.config.ts` if `app.gupitgoa.mobile` is not the ID you will register, and replace the placeholder icons in `apps/mobile/assets`.
 
+The quickest way to get an APK is [`apk.md`](../apk.md) in the repository root: CI builds one on every pull request, and the guide covers a local build step by step.
+
 ## 4. First content
 
 1. Sign in on the device: More -> Team sign-in.
 2. Review and admin -> Places -> New place, or Review queue -> Add a lead or tip.
 3. In the place editor: fill in the facts you have verified, set the pin and mark it checked, add at least one photo and set its rights, record a source (a team visit counts), tick the safety review, choose how it was verified, tap "I rechecked this today", then Publish. The checklist shows what is missing.
-4. Target 20 published places before a private beta and 50 for the first public catalogue, spread across categories and regions. Do not publish weak entries to hit a number.
+4. Optional: under **Instagram posts**, paste links to creators' posts or reels about the place, with their handle and a one-line note in your own words. They appear as tagged cards that open Instagram. To use a creator's actual photo, get their permission first, upload it under Photos, set its rights to "Permission given" and credit them as `@handle`.
+5. Target 20 published places before a private beta and 50 for the first public catalogue, spread across categories and regions. Do not publish weak entries to hit a number.
 
 ## 5. Research worker
 

@@ -26,12 +26,13 @@ This is the rulebook the research worker and reviewers follow. It is enforced in
 
 There is no automated Instagram collection in this codebase, and none should be added without Meta's written permission and an approved API scope for the account types involved.
 
-What is supported:
+What is supported, all of it done by a person:
 
-1. A reviewer sees a post and adds a **lead** in the app (Review queue -> Add a lead or tip): the place name, the link and a note in their own words.
-2. The link is stored as `source_type = social_lead` with a rights note. Nothing is fetched.
-3. The reviewer verifies the place through independent permitted sources or a visit before it can be approved.
-4. Creator photos and videos are not downloaded or reused unless permission is documented on the media record (`rights_status`, `rights_evidence_url`).
+1. **A lead.** A reviewer sees a post and adds a lead in the app (Review queue -> Add a lead or tip): the place name, the link and a note in their own words. The link is stored as `source_type = social_lead` with a rights note. Nothing is fetched. The place is then verified through independent permitted sources or a visit before it can be approved.
+2. **A tagged link on a published place.** In the place editor, under Instagram posts, a reviewer pastes a post or reel link, the creator's handle and a one-line note of their own. The place page shows a card ("@creator on Instagram") that opens the post in Instagram. The database stores only the link, the handle and the note (`spot_social_posts`); there is no column for a caption, image or video, and a test asserts that.
+3. **A creator's photo, with permission.** Ask the creator, keep the permission (a message screenshot or email), upload the photo under Photos, set rights to "Permission given", add the evidence link and credit them as `@handle` (the handle is tappable in the app). Without recorded permission the photo is never shown publicly.
+
+Why not scrape: it breaks Meta's terms, it republishes creators' work without consent, and it puts the app's store listing and the business's own Instagram account at risk. Linking sends creators traffic and credit instead, which is also the better way to get them to share the app.
 
 If Meta API access is granted later, add it as a new adapter with its own kill switch, and record the permission scope here.
 

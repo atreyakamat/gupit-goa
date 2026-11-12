@@ -1,0 +1,63 @@
+# End-to-end smoke test for a preview-mode build (no backend). Walks the main guest
+# screens and saves a screenshot of each. Run locally with a device or emulator attached:
+#   maestro test .maestro/smoke.yaml
+appId: app.gupitgoa.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: 'Explore Goa'
+    timeout: 90000
+- takeScreenshot: screens/01-welcome
+
+- tapOn: 'Explore Goa'
+- extendedWaitUntil:
+    visible: 'Chapora Fort.*'
+    timeout: 30000
+- assertVisible: 'Preview data.*'
+- takeScreenshot: screens/02-explore-list
+
+- tapOn: 'Show on map'
+# Give the map tiles a moment to arrive.
+- extendedWaitUntil:
+    visible: 'this text never appears'
+    timeout: 12000
+    optional: true
+- takeScreenshot: screens/03-explore-map
+- tapOn: 'Show as list'
+
+- tapOn: 'Chapora Fort.*'
+- extendedWaitUntil:
+    visible: 'How busy is it\?'
+    timeout: 20000
+- takeScreenshot: screens/04-place-top
+- scrollUntilVisible:
+    element: 'Before you go'
+    direction: DOWN
+- takeScreenshot: screens/05-place-crowd
+- scrollUntilVisible:
+    element: 'How we know'
+    direction: DOWN
+- takeScreenshot: screens/06-place-details
+- back
+
+- tapOn: 'Filters'
+- extendedWaitUntil:
+    visible: 'Area'
+    timeout: 15000
+- takeScreenshot: screens/07-filters
+- back
+
+- tapOn: 'Search(, tab.*)?'
+- tapOn: 'Search places'
+- inputText: 'forts'
+- extendedWaitUntil:
+    visible: 'Fort Aguada.*'
+    timeout: 20000
+- hideKeyboard
+- takeScreenshot: screens/08-search
+
+- tapOn: 'Saved(, tab.*)?'
+- takeScreenshot: screens/09-saved
+- tapOn: 'More(, tab.*)?'
+- takeScreenshot: screens/10-more
