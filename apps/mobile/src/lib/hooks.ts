@@ -3,6 +3,7 @@ import { toRpcFilters } from '@gupit/shared';
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNetworkState } from 'expo-network';
 import { api } from './api';
+import { syncAccountSoon } from '@/features/account/session';
 import { getLocalStore, type CachedSpot, type SavedList } from './db';
 
 export function useOnline(): boolean {
@@ -128,7 +129,7 @@ export function useAlternatives(spotId: string | undefined, enabled: boolean) {
   });
 }
 
-// -- Saved lists (device only) ------------------------------------------------
+// -- Saved lists (on the device; backed up only when signed in) ----------------
 
 export function useSavedLists() {
   return useQuery<SavedList[]>({
@@ -155,6 +156,11 @@ export function useListIdsContaining(spotId: string | undefined) {
 export function useSavedMutations() {
   const client = useQueryClient();
   const refresh = () => client.invalidateQueries({ queryKey: ['saved'] });
+  // Changes that the account backup needs to hear about. A no-op for guests.
+  const changed = () => {
+    syncAccountSoon();
+    return refresh();
+  };
   return {
     createList: useMutation({
       mutationFn: async (name: string) => (await getLocalStore()).createList(name),
@@ -167,7 +173,7 @@ export function useSavedMutations() {
     }),
     deleteList: useMutation({
       mutationFn: async (id: string) => (await getLocalStore()).deleteList(id),
-      onSuccess: refresh,
+      onSuccess: changed,
     }),
     save: useMutation({
       mutationFn: async (input: { listId: string | null; detail: SpotDetail }) => {
@@ -176,12 +182,12 @@ export function useSavedMutations() {
         await store.saveSpot(listId, input.detail);
         return listId;
       },
-      onSuccess: refresh,
+      onSuccess: changed,
     }),
     unsave: useMutation({
       mutationFn: async (input: { listId: string; spotId: string }) =>
         (await getLocalStore()).unsaveSpot(input.listId, input.spotId),
-      onSuccess: refresh,
+      onSuccess: changed,
     }),
   };
 }

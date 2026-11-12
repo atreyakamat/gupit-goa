@@ -19,6 +19,12 @@ export interface QueuedEvent {
   props: Record<string, unknown>;
 }
 
+/** A saved place identified the way the account backup identifies it. */
+export interface SavedRef {
+  listName: string;
+  spotId: string;
+}
+
 export class LocalStoreError extends Error {
   constructor(
     readonly code: 'invalid_name' | 'duplicate_name' | 'not_found',
@@ -32,6 +38,7 @@ export class LocalStoreError extends Error {
 export const DEFAULT_LIST_NAME = 'Goa trip';
 const MAX_UNSAVED_CACHE = 40;
 const MAX_QUEUED_EVENTS = 300;
+const MAX_PENDING_REMOVALS = 500;
 
 function cleanName(name: string): string {
   const trimmed = name.trim().replace(/\s+/g, ' ');
@@ -41,7 +48,7 @@ function cleanName(name: string): string {
   return trimmed;
 }
 
-/** All on-device persistence: guest saved lists, offline place snapshots and the analytics queue. */
+/** All on-device persistence: saved lists, offline place snapshots and the analytics queue. */
 export function createLocalStore(db: SqlDriver, deps: { now: () => number; newId: () => string }) {
   const { now, newId } = deps;
 
@@ -94,10 +101,27 @@ export function createLocalStore(db: SqlDriver, deps: { now: () => number; newId
 
     async deleteList(id: string): Promise<void> {
       await db.transaction(async () => {
+        await db.run(
+          `insert or replace into sync_removals (list_key, list_name, spot_id, removed_at)
+           select lower(l.name), l.name, s.spot_id, ?
+             from saved_spots s join saved_lists l on l.id = s.list_id where l.id = ?`,
+          [now(), id],
+        );
         await db.run('delete from saved_spots where list_id = ?', [id]);
         await db.run('delete from saved_lists where id = ?', [id]);
       });
       await store.pruneCache();
+    },
+
+    /** Finds a list by name, ignoring capitalisation, or creates it. */
+    async ensureListNamed(name: string): Promise<SavedList> {
+      const clean = cleanName(name);
+      const row = await db.first<{ id: string }>(
+        'select id from saved_lists where lower(name) = lower(?)',
+        [clean],
+      );
+      if (!row) return store.createList(clean);
+      return (await store.listLists()).find((l) => l.id === row.id)!;
     },
 
     /** The list a first-time save goes into. Created on demand. */
@@ -109,12 +133,18 @@ export function createLocalStore(db: SqlDriver, deps: { now: () => number; newId
     // -- Saved places ------------------------------------------------------
     /** Saves the place and pins a full snapshot so it can be read with no network. */
     async saveSpot(listId: string, detail: SpotDetail): Promise<void> {
-      const list = await db.first<{ id: string }>('select id from saved_lists where id = ?', [
-        listId,
-      ]);
+      const list = await db.first<{ id: string; name: string }>(
+        'select id, name from saved_lists where id = ?',
+        [listId],
+      );
       if (!list) throw new LocalStoreError('not_found', 'That list no longer exists.');
       const t = now();
       await db.transaction(async () => {
+        // Saving again cancels a removal that has not been sent yet.
+        await db.run('delete from sync_removals where list_key = lower(?) and spot_id = ?', [
+          list.name,
+          detail.id,
+        ]);
         await db.run(
           'insert or ignore into saved_spots (list_id, spot_id, slug, added_at) values (?, ?, ?, ?)',
           [listId, detail.id, detail.slug, t],
@@ -125,8 +155,54 @@ export function createLocalStore(db: SqlDriver, deps: { now: () => number; newId
     },
 
     async unsaveSpot(listId: string, spotId: string): Promise<void> {
-      await db.run('delete from saved_spots where list_id = ? and spot_id = ?', [listId, spotId]);
-      await db.run('update saved_lists set updated_at = ? where id = ?', [now(), listId]);
+      const t = now();
+      await db.transaction(async () => {
+        await db.run(
+          `insert or replace into sync_removals (list_key, list_name, spot_id, removed_at)
+           select lower(l.name), l.name, s.spot_id, ?
+             from saved_spots s join saved_lists l on l.id = s.list_id
+            where s.list_id = ? and s.spot_id = ?`,
+          [t, listId, spotId],
+        );
+        await db.run('delete from saved_spots where list_id = ? and spot_id = ?', [listId, spotId]);
+        await db.run('update saved_lists set updated_at = ? where id = ?', [t, listId]);
+        await db.run(
+          `delete from sync_removals where rowid not in
+             (select rowid from sync_removals order by removed_at desc limit ?)`,
+          [MAX_PENDING_REMOVALS],
+        );
+      });
+    },
+
+    // -- Account backup (only used when signed in) ---------------------------
+    async listAllSaved(): Promise<SavedRef[]> {
+      const rows = await db.all<{ name: string; spot_id: string }>(
+        `select l.name, s.spot_id from saved_spots s join saved_lists l on l.id = s.list_id
+          order by s.added_at`,
+      );
+      return rows.map((r) => ({ listName: r.name, spotId: r.spot_id }));
+    },
+
+    async listRemovals(): Promise<SavedRef[]> {
+      const rows = await db.all<{ list_name: string; spot_id: string }>(
+        'select list_name, spot_id from sync_removals order by removed_at',
+      );
+      return rows.map((r) => ({ listName: r.list_name, spotId: r.spot_id }));
+    },
+
+    async clearRemovals(sent: SavedRef[]): Promise<void> {
+      await db.transaction(async () => {
+        for (const item of sent) {
+          await db.run('delete from sync_removals where list_key = lower(?) and spot_id = ?', [
+            item.listName,
+            item.spotId,
+          ]);
+        }
+      });
+    },
+
+    async clearAllRemovals(): Promise<void> {
+      await db.run('delete from sync_removals');
     },
 
     async listIdsContaining(spotId: string): Promise<string[]> {

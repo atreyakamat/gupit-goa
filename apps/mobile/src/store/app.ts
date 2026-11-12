@@ -21,6 +21,12 @@ interface AppState {
 
   isAdmin: boolean;
   setAdmin: (value: boolean) => void;
+
+  /** Email of the optional account, or null for a guest (the default). */
+  accountEmail: string | null;
+  setAccountEmail: (email: string | null) => void;
+  lastSync: { at: number; ok: boolean } | null;
+  setLastSync: (value: { at: number; ok: boolean } | null) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -37,4 +43,9 @@ export const useAppStore = create<AppState>((set) => ({
 
   isAdmin: false,
   setAdmin: (isAdmin) => set({ isAdmin }),
+
+  accountEmail: null,
+  setAccountEmail: (accountEmail) => set({ accountEmail }),
+  lastSync: null,
+  setLastSync: (lastSync) => set({ lastSync }),
 }));

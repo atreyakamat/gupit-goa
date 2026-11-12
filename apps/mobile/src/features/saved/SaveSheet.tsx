@@ -7,7 +7,7 @@ import { LocalStoreError } from '@/lib/db';
 import { useListIdsContaining, useSavedLists, useSavedMutations } from '@/lib/hooks';
 import { colors } from '@/theme/tokens';
 
-/** Choose which on-device lists a place is in. Nothing here leaves the phone. */
+/** Choose which lists a place is in. Lists live on the phone; signing in is optional. */
 export function SaveSheet({
   visible,
   onClose,

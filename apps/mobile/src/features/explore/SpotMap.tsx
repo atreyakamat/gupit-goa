@@ -135,11 +135,12 @@ export function SpotMap({
             id="spot-cluster-count"
             type="symbol"
             filter={['has', 'point_count']}
-            // The font must exist on the style's glyph server; OpenFreeMap serves Noto Sans.
+            // Use the exact font stack the base style already loads for its own labels, so
+            // the glyphs are guaranteed to exist on the tile provider's font server.
             layout={{
-              'text-field': ['to-string', ['get', 'point_count']],
+              'text-field': ['get', 'point_count_abbreviated'],
               'text-size': 13,
-              'text-font': ['Noto Sans Bold'],
+              'text-font': ['Noto Sans Regular'],
               // Counts must always draw, even over the base map's own labels.
               'text-allow-overlap': true,
               'text-ignore-placement': true,

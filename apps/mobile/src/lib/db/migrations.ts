@@ -2,7 +2,7 @@ import type { SqlDriver } from './driver';
 
 /**
  * On-device schema, versioned with PRAGMA user_version. Append new entries; never edit
- * one that has shipped. Nothing in this database is uploaded: saves stay on the device.
+ * one that has shipped. Saves stay on the device unless the person signs in to back them up.
  */
 export const LOCAL_MIGRATIONS: readonly string[] = [
   // 1: saved lists, saved places, offline place snapshots, key-value settings, analytics queue
@@ -41,6 +41,16 @@ export const LOCAL_MIGRATIONS: readonly string[] = [
     name text not null,
     props text not null,
     created_at integer not null
+  );
+  `,
+  // 2: removals waiting to be sent to the account backup (only used when signed in)
+  `
+  create table sync_removals (
+    list_key text not null,
+    list_name text not null,
+    spot_id text not null,
+    removed_at integer not null,
+    primary key (list_key, spot_id)
   );
   `,
 ];
