@@ -94,7 +94,7 @@ export function CategoryArt({
   const look = categoryLook(categorySlug);
   return (
     <View
-      style={[styles.tile, { backgroundColor: look.background }, style]}
+      style={[styles.tile, style, { backgroundColor: look.background }]}
       accessible={false}
       importantForAccessibility="no-hide-descendants"
     >

@@ -36,6 +36,9 @@ appId: app.gupitgoa.mobile
     direction: DOWN
 - takeScreenshot: screens/05-place-crowd
 - scrollUntilVisible:
+    element: 'Seen on Instagram'
+    direction: DOWN
+- scrollUntilVisible:
     element: 'How we know'
     direction: DOWN
 - takeScreenshot: screens/06-place-details

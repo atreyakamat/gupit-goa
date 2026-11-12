@@ -137,9 +137,12 @@ export function SpotMap({
             filter={['has', 'point_count']}
             // The font must exist on the style's glyph server; OpenFreeMap serves Noto Sans.
             layout={{
-              'text-field': ['get', 'point_count_abbreviated'],
+              'text-field': ['to-string', ['get', 'point_count']],
               'text-size': 13,
               'text-font': ['Noto Sans Bold'],
+              // Counts must always draw, even over the base map's own labels.
+              'text-allow-overlap': true,
+              'text-ignore-placement': true,
             }}
             paint={{ 'text-color': colors.onPrimary }}
           />
