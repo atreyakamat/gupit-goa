@@ -44,6 +44,16 @@ Two real defects were found and fixed by these checks: Try-instead silently drop
 - **Creator posts**: reviewers link Instagram posts or reels to a place; the app shows a tagged card that opens Instagram, and `@handles` in photo credits are tappable. Nothing is scraped or copied.
 - **Category artwork** for places without a rights-cleared photo.
 
+## Added in the third pull request
+
+- **Optional accounts.** Guests remain the default and nothing asks for sign-up. More -> Back up saved places signs in with an emailed one-time code (no password), backs saved lists up and restores them on another phone. Account deletion is in the app.
+  - Server: `user_saved_spots` table with no API access for any role, `sync_saved_spots` and `delete_my_account` functions (migration `20261112000100_user_accounts.sql`). 12 database tests.
+  - Phone: removals are queued on the device and sent once, so a removed place does not come back; a sync never deletes anything from the phone. 9 sync tests and 4 input tests.
+  - Not yet exercised against a hosted project: the email code step needs the template change in the runbook (step 6), and no hosted backend existed when this was written.
+- **Research leads.** 36 places from tourism-board pages, newspapers, travel publications and blogs, as review candidates with their source links (`supabase/research/`). No coordinates are supplied and nothing is published; 5 tests enforce that. Google Maps and Reddit were not scraped and are not used as evidence.
+- **Map cluster counts** now use the font the base map style already loads. This is a likely fix; confirm on the emulator screenshot.
+- **Usability.** The empty Saved screen explains how to save and links to Explore; privacy text covers the optional account.
+
 ## What is built
 
 **Database** (`supabase/migrations`, 8 files): PostGIS in the `extensions` schema; catalogue, research, crowd, reports, analytics, partners and audit tables; RLS on every table with no guest table access; guest, reviewer and worker RPCs; taxonomy seed (7 groups, 47 subcategories); listing-photo bucket and policies; scheduled-maintenance functions.

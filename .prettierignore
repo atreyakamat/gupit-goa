@@ -7,3 +7,4 @@ package-lock.json
 apps/mobile/android
 apps/mobile/ios
 supabase/.temp
+supabase/research/candidates-*.json

@@ -129,7 +129,7 @@ ls -lh app/build/outputs/apk/release/app-release.apk
 
 Without this the app runs in preview mode, which is fine for looking at the UI. For real data:
 
-1. Follow **section 1** of [`docs/runbook.md`](docs/runbook.md): create a Supabase project, run `npx supabase db push`, add yourself to `admins`, disable public sign-ups.
+1. Follow **section 1** of [`docs/runbook.md`](docs/runbook.md): create a Supabase project, run `npx supabase db push`, add yourself to `admins`.
 2. Create `apps/mobile/.env` (it is git-ignored) with the project's **public** values:
    ```
    EXPO_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
@@ -142,6 +142,8 @@ Without this the app runs in preview mode, which is fine for looking at the UI. 
 The catalogue starts empty. Add and publish places from inside the app: More -> Team sign-in -> Review and admin.
 
 ---
+
+After the backend is connected, follow `docs/runbook.md` section 1, steps 6 and 7, to switch on optional accounts (email code template) and load the first research leads for review.
 
 ## Part D: install and check
 

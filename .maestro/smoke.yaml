@@ -64,3 +64,11 @@ appId: app.gupitgoa.mobile
 - takeScreenshot: screens/09-saved
 - tapOn: 'More(, tab.*)?'
 - takeScreenshot: screens/10-more
+
+# The optional account screen opens and, in a preview build, says accounts are off.
+- tapOn: 'Back up saved places'
+- extendedWaitUntil:
+    visible: '.*accounts are switched off.*'
+    timeout: 15000
+- takeScreenshot: screens/11-account
+- back

@@ -29,8 +29,15 @@ Use separate projects for development and production.
    insert into public.admins (user_id, display_name)
    select id, 'Your Name' from auth.users where email = 'you@example.com';
    ```
-   Turn **off** public sign-ups (Authentication -> Providers -> Email -> disable "Allow new users to sign up"). Guests never need an account.
-6. Optional, recommended: schedule maintenance (Database -> Extensions -> enable `pg_cron`, then):
+   Being a reviewer is decided only by the `public.admins` list, never by having an account.
+6. Optional accounts (backing up saved places). Guests never need one. To switch the feature on:
+   - Authentication -> Providers -> Email: keep "Allow new users to sign up" **on** and "Confirm email" on.
+   - Authentication -> Emails -> Templates: in both **Magic Link** and **Confirm signup**, show the code. A minimal body is: `Your Gupit Goa code is {{ .Token }}`. The app asks for this code; it does not use links.
+   - Authentication -> Emails -> SMTP: add your own SMTP provider before launch. The built-in sender is for testing and only sends a few emails per hour.
+   - To switch accounts off instead, disable "Allow new users to sign up". The app keeps working for guests; the Account screen will simply fail to send a code.
+7. Load the first research leads into the review queue (nothing is published by this):
+   paste `supabase/research/candidates-2026-11.sql` into the SQL editor and run it. The 36 places then appear under Review and admin -> Candidates, each with its sources. A reviewer must place the pin, add access and safety notes, and approve before a place goes live.
+8. Optional, recommended: schedule maintenance (Database -> Extensions -> enable `pg_cron`, then):
    ```sql
    select cron.schedule('gupit-mark-stale', '15 2 * * *', $$select private.mark_stale_listings()$$);
    select cron.schedule('gupit-purge-crowd', '45 2 * * *', $$select private.purge_old_crowd_reports()$$);
