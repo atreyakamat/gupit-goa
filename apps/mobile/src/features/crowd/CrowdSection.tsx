@@ -12,6 +12,7 @@ import { Sheet } from '@/components/Sheet';
 import { AppText, Badge, Button, Card, Notice } from '@/components/ui';
 import { track } from '@/lib/analytics';
 import { api } from '@/lib/api';
+import { isPreviewMode } from '@/lib/env';
 import { useOnline } from '@/lib/hooks';
 import { getPositionOnce } from '@/lib/location';
 import { colors, spacing } from '@/theme/tokens';
@@ -112,7 +113,7 @@ export function CrowdSection({
           label="I am here: report"
           kind="secondary"
           icon="megaphone-outline"
-          disabled={!online}
+          disabled={!online || isPreviewMode}
           onPress={() => {
             setMessage(null);
             setOpen(true);

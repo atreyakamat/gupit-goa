@@ -22,6 +22,9 @@ export function adminErrorText(error: unknown): string {
     source_domain_blocked: 'That site is on the blocked list and cannot be used as a source.',
     invalid_url: 'Enter a full link starting with https://',
     note_required: 'Add a note explaining the decision.',
+    invalid_instagram_post_url:
+      'Paste the link to an Instagram post or reel (not a profile or story).',
+    invalid_instagram_handle: 'That does not look like an Instagram handle.',
     candidate_already_closed: 'This candidate has already been decided.',
   };
   for (const [code, text] of Object.entries(known)) if (message.includes(code)) return text;
@@ -291,6 +294,21 @@ export const adminApi = {
   saveSource: (id: string | null, data: Record<string, unknown>) =>
     call<string>('admin_save_source', { p_id: id, p_data: data }),
   deleteSource: (id: string) => call<null>('admin_delete_source', { p_id: id }),
+
+  socialPosts: (spotId: string) =>
+    rows<{ id: string; post_url: string; creator_handle: string | null; note: string | null }>(
+      'spot_social_posts',
+      'id, post_url, creator_handle, note',
+      (q) => q.eq('spot_id', spotId).order('sort_order'),
+    ),
+  saveSocialPost: (spotId: string, url: string, handle: string | null, note: string | null) =>
+    call<string>('admin_save_social_post', {
+      p_spot_id: spotId,
+      p_url: url,
+      p_handle: handle,
+      p_note: note,
+    }),
+  deleteSocialPost: (id: string) => call<null>('admin_delete_social_post', { p_id: id }),
 
   partners: () =>
     rows<PartnerRow & { spots: { name: string } | null }>(

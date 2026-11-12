@@ -4,6 +4,7 @@ import {
   crowdStatusSchema,
   crowdSubmitResultSchema,
   spotCardSchema,
+  socialPostSchema,
   spotDetailSchema,
   toRpcFilters,
   type Alternatives,
@@ -13,12 +14,15 @@ import {
   type LatLng,
   type PartnerSurface,
   type ProblemType,
+  type SocialPost,
   type SpotCard,
   type SpotDetail,
   type SpotFilters,
 } from '@gupit/shared';
 import { z } from 'zod';
+import { isBackendConfigured } from './env';
 import { getInstallationToken } from './installation';
+import { createPreviewApi } from './preview';
 import { getSupabase } from './supabase';
 
 export class ApiError extends Error {
@@ -48,7 +52,7 @@ export async function rpc<T>(
 
 const cards = z.array(spotCardSchema);
 
-export const api = {
+const liveApi = {
   listCategories(): Promise<Category[]> {
     return rpc('list_categories', {}, z.array(categorySchema));
   },
@@ -206,6 +210,10 @@ export const api = {
     );
   },
 
+  getSocialPosts(spotId: string): Promise<SocialPost[]> {
+    return rpc('get_spot_social_posts', { p_spot_id: spotId }, z.array(socialPostSchema));
+  },
+
   async linkPartnerDevice(
     code: string,
   ): Promise<{ linked: boolean; business_name?: string | null }> {
@@ -217,8 +225,13 @@ export const api = {
   },
 };
 
+export type Api = typeof liveApi;
+
+/** The live backend, or bundled sample data when the build has no backend configured. */
+export const api: Api = isBackendConfigured ? liveApi : createPreviewApi();
+
 /** Public URL for an object in the listing-photo bucket. */
 export function mediaUrl(path: string | null | undefined): string | null {
-  if (!path) return null;
+  if (!path || !isBackendConfigured) return null;
   return getSupabase().storage.from('spot-media').getPublicUrl(path).data.publicUrl;
 }

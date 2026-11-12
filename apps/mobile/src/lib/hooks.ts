@@ -4,7 +4,6 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 import { useNetworkState } from 'expo-network';
 import { api } from './api';
 import { getLocalStore, type CachedSpot, type SavedList } from './db';
-import { isBackendConfigured } from './env';
 
 export function useOnline(): boolean {
   const state = useNetworkState();
@@ -16,7 +15,6 @@ export function useCategories() {
   return useQuery({
     queryKey: ['categories'],
     queryFn: api.listCategories,
-    enabled: isBackendConfigured,
     staleTime: 24 * 60 * 60_000,
   });
 }
@@ -55,7 +53,7 @@ export function useBrowseCards(input: {
           : cards.filter((c) => c.distance_m == null || c.distance_m <= radiusM);
       return { cards: within, fetchedAt: Date.now() };
     },
-    enabled: isBackendConfigured && (input.enabled ?? true),
+    enabled: input.enabled ?? true,
     placeholderData: keepPreviousData,
     staleTime: 60_000,
   });
@@ -81,11 +79,7 @@ export function useViewportCards(bounds: Bounds | null, filters: SpotFilters) {
       cards: await api.spotsInBbox({ ...bounds!, filters }),
       fetchedAt: Date.now(),
     }),
-    enabled:
-      isBackendConfigured &&
-      bounds != null &&
-      bounds.north > bounds.south &&
-      bounds.east > bounds.west,
+    enabled: bounds != null && bounds.north > bounds.south && bounds.east > bounds.west,
     placeholderData: keepPreviousData,
     staleTime: 60_000,
   });
@@ -129,7 +123,7 @@ export function useAlternatives(spotId: string | undefined, enabled: boolean) {
   return useQuery({
     queryKey: ['alternatives', spotId],
     queryFn: () => api.getAlternatives(spotId!),
-    enabled: isBackendConfigured && enabled && Boolean(spotId),
+    enabled: enabled && Boolean(spotId),
     staleTime: 60_000,
   });
 }
@@ -190,4 +184,13 @@ export function useSavedMutations() {
       onSuccess: refresh,
     }),
   };
+}
+
+export function useSocialPosts(spotId: string | undefined) {
+  return useQuery({
+    queryKey: ['social-posts', spotId],
+    queryFn: () => api.getSocialPosts(spotId!),
+    enabled: Boolean(spotId),
+    staleTime: 10 * 60_000,
+  });
 }

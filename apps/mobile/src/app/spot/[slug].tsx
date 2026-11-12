@@ -24,7 +24,9 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
+import { CategoryArt } from '@/components/CategoryArt';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { PreviewBanner } from '@/components/PreviewBanner';
 import {
   AppText,
   Badge,
@@ -41,8 +43,10 @@ import {
 import { AlternativesSection } from '@/features/crowd/AlternativesSection';
 import { CrowdSection } from '@/features/crowd/CrowdSection';
 import { SaveSheet } from '@/features/saved/SaveSheet';
+import { CreditLine, SocialPostsSection } from '@/features/spots/SocialPosts';
 import { getSessionId, track } from '@/lib/analytics';
 import { api, mediaUrl } from '@/lib/api';
+import { isPreviewMode } from '@/lib/env';
 import {
   useListIdsContaining,
   useOnline,
@@ -80,7 +84,14 @@ function Fact({ label, value }: { label: string; value: string | null | undefine
 
 function Gallery({ detail }: { detail: SpotDetail }) {
   const { width } = useWindowDimensions();
-  if (detail.media.length === 0) return null;
+  if (detail.media.length === 0) {
+    // No rights-cleared photo yet: show category artwork rather than an empty gap.
+    return (
+      <View style={styles.heroWrap}>
+        <CategoryArt categorySlug={detail.category.slug} size={64} style={styles.hero} />
+      </View>
+    );
+  }
   const imageWidth = detail.media.length === 1 ? width - spacing.lg * 2 : width * 0.8;
   return (
     <ScrollView
@@ -101,11 +112,7 @@ function Gallery({ detail }: { detail: SpotDetail }) {
             transition={200}
             accessibilityLabel={item.alt_text ?? `Photo ${index + 1} of ${detail.name}`}
           />
-          {item.credit_line ? (
-            <AppText variant="caption" color={colors.inkMuted}>
-              Photo: {item.credit_line}
-            </AppText>
-          ) : null}
+          {item.credit_line ? <CreditLine credit={item.credit_line} /> : null}
         </View>
       ))}
     </ScrollView>
@@ -209,7 +216,8 @@ export default function SpotScreen() {
 
   const onWhatsApp = async () => {
     const partner = detail.partner;
-    if (!partner) return;
+    // Preview partners are invented, so there is nobody to message.
+    if (!partner || isPreviewMode) return;
     const url = buildWhatsAppUrl(partner.whatsapp_number, partnerEnquiryText(detail.name));
     if (!url) return;
     // Record intent first (no message content), then hand off. A logging failure never blocks the user.
@@ -233,6 +241,7 @@ export default function SpotScreen() {
     <Screen scroll edges={['bottom']} padded={false}>
       <Stack.Screen options={{ title: detail.name }} />
       <OfflineBanner />
+      <PreviewBanner />
       <Gallery detail={detail} />
       <View style={styles.body}>
         <View style={styles.titleBlock}>
@@ -385,12 +394,15 @@ export default function SpotScreen() {
               <Button
                 label="Message on WhatsApp"
                 icon="logo-whatsapp"
+                disabled={isPreviewMode}
                 onPress={() => void onWhatsApp()}
                 accessibilityHint="Opens WhatsApp. We record only that the button was tapped, never your message."
               />
             </Card>
           </Section>
         ) : null}
+
+        <SocialPostsSection spotId={detail.id} />
 
         <Section title="How we know">
           <AppText color={colors.inkMuted}>
@@ -431,6 +443,8 @@ export default function SpotScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   gallery: { gap: spacing.md, paddingHorizontal: spacing.lg, paddingTop: spacing.sm },
+  heroWrap: { paddingHorizontal: spacing.lg, paddingTop: spacing.sm },
+  hero: { height: 168, borderRadius: radius.lg },
   photo: {
     width: '100%',
     aspectRatio: 4 / 3,

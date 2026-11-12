@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { PreviewBanner } from '@/components/PreviewBanner';
 import {
   AppText,
   Button,
@@ -85,6 +86,7 @@ export default function Search() {
         ) : null}
       </View>
       <OfflineBanner />
+      <PreviewBanner />
       {!active ? (
         <View style={styles.ideas}>
           <AppText variant="label" color={colors.inkMuted}>
